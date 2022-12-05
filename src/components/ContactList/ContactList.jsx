@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Icon, ListItem } from "./ContactList.styled";
+import { ListItem } from "./ContactList.styled";
+import ContactListItem from "components/ContactListItem";
 
 const ContactList = ({ contacts, onDeleteContact }) => {
 
@@ -9,12 +10,10 @@ const ContactList = ({ contacts, onDeleteContact }) => {
       {contacts.map(({id, name, number}) => {
         return (
           <ListItem key={id}>
-            <Icon></Icon>
-            <span>{name}:</span>
-            <span>{number}</span>
-            <Button
-              onClick={() => onDeleteContact(id)}
-            >Delete</Button>
+            <ContactListItem
+              name={name}
+              number={number}
+              onDeleteContact={() => onDeleteContact(id)} />
           </ListItem>
         )
       })}
@@ -25,8 +24,6 @@ const ContactList = ({ contacts, onDeleteContact }) => {
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired
   }))
 }
 
